@@ -1,84 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!-- Декларация XML документа - версия 1.0 с кодировкой UTF-8 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Версия модели POM - всегда 4.0.0 для Maven 2/3 -->
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- Родительский POM - наследает конфигурации и зависимости от Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+        <!-- Версия Spring Boot - управляет версиями всех зависимостей -->
         <version>4.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <!-- Искать родительский POM в удаленном репозитории, не локально -->
+        <relativePath/>
     </parent>
-    <groupId>com.oskarvos</groupId>
-    <artifactId>weather-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>weather-app</name>
-    <description>weather-app</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
+
+    <!-- Уникальные идентификаторы проекта Maven -->
+    <groupId>com.oskarvos</groupId>        <!-- Домен организации в обратном порядке -->
+    <artifactId>weather-app</artifactId>   <!-- Имя проекта/артефакта -->
+    <version>0.0.1-SNAPSHOT</version>      <!-- Версия проекта (SNAPSHOT = в разработке) -->
+
+    <!-- Метаданные проекта -->
+    <name>weather-app</name>                <!-- Человекочитаемое имя проекта -->
+    <description>weather-app</description>  <!-- Описание проекта -->
+
+    <!-- Информация о разработчиках проекта -->
     <developers>
-        <developer/>
+        <developer>
+            <id>oskarvos</id>               <!-- Уникальный идентификатор разработчика -->
+            <name>Oleg</name>               <!-- Имя разработчика -->
+            <email>oskaryahoo@gmail.com</email> <!-- Email для связи -->
+            <url>https://github.com/oskarvos</url> <!-- Ссылка на профиль -->
+            <roles>                         <!-- Роли разработчика в проекте -->
+                <role>Архитектор</role>     <!-- Архитектор системы -->
+                <role>Разработчик</role>    <!-- Разработчик кода -->
+            </roles>
+            <timezone>Belarus/Brest</timezone> <!-- Часовой пояс разработчика -->
+        </developer>
     </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
+    <!-- Свойства проекта - переменные, используемые в POM -->
     <properties>
+        <!-- Версия Java для компиляции и запуска -->
         <java.version>17</java.version>
     </properties>
+
+    <!-- Секция зависимостей - библиотеки, требуемые проекту -->
     <dependencies>
+        <!--
+          Spring Boot Web Starter - для создания веб-приложений
+          Включает: Spring MVC, встроенный Tomcat, Jackson для JSON
+        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--
+          PostgreSQL драйвер JDBC - для подключения к базе данных PostgreSQL
+          scope=runtime: нужен только во время выполнения, не для компиляции
+        -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+
+        <!--
+          Включает: JUnit, Mockito, Spring Test
+          scope=test: только для тестов, не попадает в production JAR
+        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
+    <!-- Секция сборки - конфигурация плагинов и процесса сборки -->
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
+            <!--
+              Spring Boot Maven Plugin - создает исполняемый JAR файл
+              Позволяет запускать приложение командой: java -jar weather-app.jar
+            -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
