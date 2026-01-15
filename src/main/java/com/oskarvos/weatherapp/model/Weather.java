@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 
 public class Weather {
 
-    private long id;
+    private Long id;
     private String city;
-    private double temperature;
+    private Double temperature;
     private LocalDateTime recorderDateTime;
 
     public Weather() {}
 
-    public Weather(String city, double temperature, LocalDateTime recorderDateTime) {
+    public Weather(String city, Double temperature, LocalDateTime recorderDateTime) {
         this.city = city;
         this.temperature = temperature;
         this.recorderDateTime = recorderDateTime;
@@ -21,7 +21,7 @@ public class Weather {
         return city;
     }
 
-    public double getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
@@ -33,7 +33,7 @@ public class Weather {
         this.city = city;
     }
 
-    public void setTemperature(double temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 
